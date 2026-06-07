@@ -96,9 +96,27 @@ export default function Contact() {
   const [resumePreview, setResumePreview] = useState<string>('');
   const [photoPreview, setPhotoPreview] = useState<string>('');
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState<{
+    type: 'success' | 'error';
+    message: string;
+  } | null>(null);
+
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  // File を base64（データ部分のみ）に変換
+  const fileToBase64 = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        resolve(result.split(',')[1] || '');
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
 
   const handleInquiryChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -150,31 +168,73 @@ export default function Contact() {
     }
   };
 
-  const handleInquirySubmit = (e: React.FormEvent) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const handleInquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitResult(null);
 
     if (!inquiryForm.name || !inquiryForm.email || !inquiryForm.inquiryType || !inquiryForm.message) {
-      alert('必須項目を入力してください');
+      setSubmitResult({ type: 'error', message: '必須項目を入力してください。' });
       return;
     }
 
     if (!inquiryForm.privacyConsent) {
-      alert('プライバシーポリシーに同意してください');
+      setSubmitResult({ type: 'error', message: 'プライバシーポリシーに同意してください。' });
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(inquiryForm.email)) {
-      alert('正しいメールアドレスを入力してください');
+      setSubmitResult({ type: 'error', message: '正しいメールアドレスを入力してください。' });
       return;
     }
 
-    console.log('一般お問い合わせ送信:', inquiryForm);
-    alert('お問い合わせを受け付けました（実際の送信機能は後で実装予定）');
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'inquiry',
+          name: inquiryForm.name,
+          email: inquiryForm.email,
+          phone: inquiryForm.phone,
+          inquiryType: inquiryForm.inquiryType,
+          message: inquiryForm.message,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || '送信に失敗しました。');
+      }
+      setSubmitResult({
+        type: 'success',
+        message: 'お問い合わせを送信しました。担当者よりご連絡いたします。',
+      });
+      setInquiryForm({
+        name: '',
+        email: '',
+        phone: '',
+        inquiryType: '',
+        message: '',
+        privacyConsent: false,
+      });
+    } catch (err) {
+      setSubmitResult({
+        type: 'error',
+        message:
+          err instanceof Error
+            ? err.message
+            : '送信に失敗しました。時間をおいて再度お試しください。',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleRecruitmentSubmit = (e: React.FormEvent) => {
+  const handleRecruitmentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitResult(null);
 
     if (
       !recruitmentForm.name ||
@@ -182,23 +242,80 @@ export default function Contact() {
       !recruitmentForm.phone ||
       !recruitmentForm.position
     ) {
-      alert('必須項目を入力してください');
+      setSubmitResult({ type: 'error', message: '必須項目を入力してください。' });
       return;
     }
 
     if (!recruitmentForm.privacyConsent) {
-      alert('プライバシーポリシーに同意してください');
+      setSubmitResult({ type: 'error', message: 'プライバシーポリシーに同意してください。' });
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(recruitmentForm.email)) {
-      alert('正しいメールアドレスを入力してください');
+      setSubmitResult({ type: 'error', message: '正しいメールアドレスを入力してください。' });
       return;
     }
 
-    console.log('求人応募送信:', recruitmentForm);
-    alert('ご応募ありがとうございます（実際の送信機能は後で実装予定）');
+    setIsSubmitting(true);
+    try {
+      const attachments: { filename: string; content: string }[] = [];
+      if (recruitmentForm.resume) {
+        attachments.push({
+          filename: recruitmentForm.resume.name,
+          content: await fileToBase64(recruitmentForm.resume),
+        });
+      }
+      if (recruitmentForm.photo) {
+        attachments.push({
+          filename: recruitmentForm.photo.name,
+          content: await fileToBase64(recruitmentForm.photo),
+        });
+      }
+
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'recruitment',
+          name: recruitmentForm.name,
+          email: recruitmentForm.email,
+          phone: recruitmentForm.phone,
+          position: recruitmentForm.position,
+          message: recruitmentForm.message,
+          attachments,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || '送信に失敗しました。');
+      }
+      setSubmitResult({
+        type: 'success',
+        message: 'ご応募ありがとうございます。担当者よりご連絡いたします。',
+      });
+      setRecruitmentForm({
+        name: '',
+        email: '',
+        phone: '',
+        position: '',
+        resume: null,
+        photo: null,
+        message: '',
+        privacyConsent: false,
+      });
+      setResumePreview('');
+      setPhotoPreview('');
+    } catch (err) {
+      setSubmitResult({
+        type: 'error',
+        message:
+          err instanceof Error
+            ? err.message
+            : '送信に失敗しました。時間をおいて再度お試しください。',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const inquiryTypes = [
@@ -260,7 +377,10 @@ export default function Contact() {
                   ).map(tab => (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
+                      onClick={() => {
+                        setActiveTab(tab.id);
+                        setSubmitResult(null);
+                      }}
                       className={`relative pb-4 text-sm md:text-base font-medium tracking-wide transition-colors duration-200 ${
                         activeTab === tab.id ? 'text-gray-700' : 'text-gray-400 hover:text-gray-600'
                       }`}
@@ -388,21 +508,36 @@ export default function Contact() {
                     </label>
                   </div>
 
+                  {submitResult && (
+                    <div
+                      className={`rounded-lg px-4 py-3 text-sm ${
+                        submitResult.type === 'success'
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-100'
+                          : 'bg-rose-50 text-rose-600 border border-rose-100'
+                      }`}
+                    >
+                      {submitResult.message}
+                    </div>
+                  )}
+
                   <div className="pt-6">
                     <button
                       type="submit"
-                      className="w-full inline-flex items-center justify-center px-10 py-4 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-shadow duration-200"
+                      disabled={isSubmitting}
+                      className="w-full inline-flex items-center justify-center px-10 py-4 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-shadow duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                       style={{ background: BUTTON_GRADIENT }}
                     >
-                      送信する
-                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
+                      {isSubmitting ? '送信中...' : '送信する'}
+                      {!isSubmitting && (
+                        <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                      )}
                     </button>
                   </div>
                 </form>
@@ -554,21 +689,36 @@ export default function Contact() {
                     </label>
                   </div>
 
+                  {submitResult && (
+                    <div
+                      className={`rounded-lg px-4 py-3 text-sm ${
+                        submitResult.type === 'success'
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-100'
+                          : 'bg-rose-50 text-rose-600 border border-rose-100'
+                      }`}
+                    >
+                      {submitResult.message}
+                    </div>
+                  )}
+
                   <div className="pt-6">
                     <button
                       type="submit"
-                      className="w-full inline-flex items-center justify-center px-10 py-4 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-shadow duration-200"
+                      disabled={isSubmitting}
+                      className="w-full inline-flex items-center justify-center px-10 py-4 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-shadow duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                       style={{ background: BUTTON_GRADIENT }}
                     >
-                      応募する
-                      <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
+                      {isSubmitting ? '送信中...' : '応募する'}
+                      {!isSubmitting && (
+                        <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                      )}
                     </button>
                   </div>
                 </form>
