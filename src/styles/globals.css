@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 232, 248, 245;  /* #E8F8F5 - 淡いアクア */
+  --background-end-rgb: 255, 255, 255;
+
+  /* 水面の光を思わせる淡いブルーグリーンのカラーパレット */
+  --aqua-primary: #9FE2D3;    /* ミントアクアブルーグリーン */
+  --aqua-light: #C9F0E6;      /* 水面の輝き */
+  --aqua-medium: #7DD8C4;     /* 深い水面 */
+  --aqua-accent: #5BC6B5;     /* アクアアクセント */
+  --aqua-subtle: #E8F8F5;     /* 淡い背景 */
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
