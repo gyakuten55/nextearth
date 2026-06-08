@@ -16,7 +16,7 @@ export default function Company() {
     { label: '従業員数', value: '30人' },
     { label: '所在地', value: '埼玉県入間郡毛呂山町大字西戸903番地1' },
     { label: '電話番号', value: '080-7685-6774' },
-    { label: 'メールアドレス', value: 'info@nextearth.jp' },
+    { label: 'メールアドレス', value: 'info@biz-nextearth.com' },
     {
       label: '事業内容',
       value: 'リサイクル海外輸出、及び販売代行\n不用品回収、買取\n遺品、生前整理',
@@ -268,7 +268,7 @@ export default function Company() {
                   </p>
                   <p>
                     <span className="inline-block w-14 text-gray-500">Email</span>
-                    info@nextearth.jp
+                    info@biz-nextearth.com
                   </p>
                 </div>
               </div>

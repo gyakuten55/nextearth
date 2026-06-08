@@ -180,7 +180,7 @@ export default function Privacy() {
                   <p>株式会社Next Earth</p>
                   <p>〒350-0465　埼玉県入間郡毛呂山町大字西戸903番地1</p>
                   <p>TEL：080-7685-6774</p>
-                  <p>Email：info@nextearth.jp</p>
+                  <p>Email：info@biz-nextearth.com</p>
                 </div>
               </div>
 

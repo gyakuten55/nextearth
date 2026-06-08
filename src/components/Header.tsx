@@ -19,10 +19,10 @@ const Header: React.FC = () => {
   };
 
   const navigationItems = [
-    { label: 'About', href: '/company' },
-    { label: 'Services', href: '/services' },
-    { label: 'Recruit', href: '/recruit' },
-    { label: 'Contact', href: '/contact' },
+    { label: '会社情報', href: '/company' },
+    { label: '事業内容', href: '/services' },
+    { label: '採用情報', href: '/recruit' },
+    { label: 'お問い合わせ', href: '/contact' },
   ];
 
   return (

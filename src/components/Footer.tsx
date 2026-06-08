@@ -56,10 +56,10 @@ const Footer: React.FC = () => {
             <div className="text-sm text-gray-500">
               <p className="mb-1">株式会社 Next Earth</p>
               <a
-                href="mailto:info@nextearth.jp"
+                href="mailto:info@biz-nextearth.com"
                 className="text-sakura-accent hover:text-sakura-deep transition-colors duration-200"
               >
-                info@nextearth.jp
+                info@biz-nextearth.com
               </a>
             </div>
           </div>

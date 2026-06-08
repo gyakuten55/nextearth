@@ -96,10 +96,12 @@ export default function Services() {
   ];
 
   const pricing = [
-    { truck: '軽トラック', people: '1名', valuable: '¥15,000', nonValuable: '¥25,000', note: '一般家庭向け' },
-    { truck: '2tトラック（平ボディ）', people: '2名', valuable: '¥25,000', nonValuable: '¥40,000', note: '中規模案件' },
-    { truck: '2tトラック（箱）', people: '2名', valuable: '¥25,000', nonValuable: '¥55,000', note: '大規模案件' },
-    { truck: '4tトラック（箱）', people: '2〜3名', valuable: '¥25,000', nonValuable: '¥75,000', note: '法人・大型案件' },
+    { plan: 'SSプラン', target: 'ちょっとした片付け向け', features: ['目安：1㎡', '軽トラック相当', '少量の不用品'], price: '¥8,000〜' },
+    { plan: 'Sプラン', target: '家具・家電の処分向け', features: ['目安：1.5㎡', '単身向け', '洗濯機・冷蔵庫など'], price: '¥15,000〜' },
+    { plan: 'Mプラン', target: '1R〜1Kのお部屋整理', features: ['目安：3㎡', '一人暮らし向け', '引越し前後にも対応'], price: '¥30,000〜' },
+    { plan: 'Lプラン', target: '1DK〜1LDK向け', features: ['目安：5㎡', '家族引越し対応', '大型回収対応'], price: '¥50,000〜' },
+    { plan: 'LLプラン', target: '2DK以上・大量回収', features: ['目安：10㎡', '倉庫・事務所対応', '法人回収OK'], price: '¥100,000〜' },
+    { plan: '3Lプラン', target: 'ゴミ屋敷・遺品整理', features: ['一軒家対応', '大量残置物', '特殊清掃相談可'], price: 'お見積り対応' },
   ];
 
   return (
@@ -202,70 +204,41 @@ export default function Services() {
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
             >
-              <SectionHeading number="02" eyebrow="Pricing" title="不用品回収料金目安" />
+              <SectionHeading number="02" eyebrow="Pricing" title="料金プラン" />
 
               <p className="text-sm text-gray-500 mb-10">
                 ※料金は目安です。詳細はお問い合わせください。
               </p>
 
-              {/* デスクトップ：テーブル */}
-              <div className="hidden md:block">
-                <div className="grid grid-cols-12 gap-6 py-4 border-t border-b border-gray-200">
-                  <div className="col-span-4 text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">
-                    トラックサイズ
-                  </div>
-                  <div className="col-span-3 text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">
-                    価値あるもの
-                  </div>
-                  <div className="col-span-3 text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">
-                    価値ないもの
-                  </div>
-                  <div className="col-span-2 text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase">
-                    備考
-                  </div>
-                </div>
+              {/* 料金プランカード */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {pricing.map((item, index) => (
                   <div
                     key={index}
-                    className="grid grid-cols-12 gap-6 py-6 border-b border-gray-100 items-baseline"
+                    className="flex flex-col border border-gray-100 rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow duration-200"
                   >
-                    <div className="col-span-4">
-                      <p className="text-gray-700 font-medium">{item.truck}</p>
-                      <p className="text-gray-500 text-sm">{item.people}</p>
-                    </div>
-                    <div className="col-span-3">
-                      <span className="text-lg font-bold" style={GRADIENT_TEXT}>
-                        {item.valuable}
-                      </span>
-                    </div>
-                    <div className="col-span-3">
-                      <span className="text-lg font-bold text-gray-700">{item.nonValuable}</span>
-                    </div>
-                    <div className="col-span-2 text-sm text-gray-500">{item.note}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* モバイル：縦並び */}
-              <div className="md:hidden space-y-6">
-                {pricing.map((item, index) => (
-                  <div key={index} className="border-t border-gray-100 pt-6 first:border-t-0 first:pt-0">
-                    <p className="text-xs font-semibold tracking-[0.2em] text-gray-500 uppercase mb-1">
-                      {item.note}
+                    <p className="text-2xl font-bold" style={GRADIENT_TEXT}>
+                      {item.plan}
                     </p>
-                    <p className="text-gray-700 font-medium">{item.truck}（{item.people}）</p>
-                    <div className="mt-3 grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-xs text-gray-500 mb-1">価値あるもの</p>
-                        <p className="text-lg font-bold" style={GRADIENT_TEXT}>
-                          {item.valuable}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 mb-1">価値ないもの</p>
-                        <p className="text-lg font-bold text-gray-700">{item.nonValuable}</p>
-                      </div>
-                    </div>
+                    <p className="mt-1 text-sm text-gray-500">{item.target}</p>
+
+                    <ul className="mt-5 space-y-2.5 flex-1">
+                      {item.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center gap-3 text-sm">
+                          <span
+                            className="inline-block w-4 h-px flex-shrink-0"
+                            style={{
+                              background: 'linear-gradient(90deg, #f0a3b9 0%, #a8c5dd 100%)',
+                            }}
+                          />
+                          <span className="text-gray-600">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <p className="mt-6 pt-5 border-t border-gray-100 text-2xl font-bold text-gray-700">
+                      {item.price}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -277,8 +250,6 @@ export default function Services() {
                   </p>
                 </div>
                 <ul className="col-span-12 md:col-span-9 text-gray-600 text-sm space-y-2 leading-relaxed">
-                  <li>価値あるもの：リサイクル・再販可能な品物。</li>
-                  <li>価値ないもの：処分が必要な品物。</li>
                   <li>現地でのお見積もりは無料です。</li>
                   <li>物量や作業内容により料金が変動する場合があります。</li>
                 </ul>
