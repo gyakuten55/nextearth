@@ -345,7 +345,7 @@ export default function Contact() {
         <title>お問い合わせ - Next Earth</title>
         <meta
           name="description"
-          content="株式会社Next Earthへのお問い合わせ・求人応募はこちらから。お気軽にご連絡ください。"
+          content="株式会社NextEarthへのお問い合わせ・求人応募はこちらから。お気軽にご連絡ください。"
         />
       </Head>
 

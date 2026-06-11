@@ -110,7 +110,7 @@ export default function Services() {
         <title>事業内容 - Next Earth</title>
         <meta
           name="description"
-          content="株式会社Next Earthの事業内容。リサイクル輸出、不用品回収、買取サービスを提供しています。"
+          content="株式会社NextEarthの事業内容。リサイクル輸出、不用品回収、買取サービスを提供しています。"
         />
       </Head>
 

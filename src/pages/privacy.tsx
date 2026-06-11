@@ -80,7 +80,7 @@ export default function Privacy() {
         <title>プライバシーポリシー - Next Earth</title>
         <meta
           name="description"
-          content="株式会社Next Earthのプライバシーポリシー。個人情報の取り扱いについてご説明します。"
+          content="株式会社NextEarthのプライバシーポリシー。個人情報の取り扱いについてご説明します。"
         />
       </Head>
 
@@ -115,7 +115,7 @@ export default function Privacy() {
               />
 
               <p className="text-gray-600 leading-loose mb-12">
-                株式会社Next Earth（以下「当社」といいます。）は、お客様の個人情報の重要性を認識し、その適切な取り扱いと保護に努めます。当社は、個人情報の保護に関する法律その他の関係法令を遵守し、以下のとおりプライバシーポリシーを定めます。
+                株式会社NextEarth（以下「当社」といいます。）は、お客様の個人情報の重要性を認識し、その適切な取り扱いと保護に努めます。当社は、個人情報の保護に関する法律その他の関係法令を遵守し、以下のとおりプライバシーポリシーを定めます。
               </p>
 
               <div className="space-y-12">
@@ -177,8 +177,8 @@ export default function Privacy() {
                   <p className="mb-4">
                     本ポリシーに関するお問い合わせ、個人情報の開示等のご請求は、下記までご連絡ください。
                   </p>
-                  <p>株式会社Next Earth</p>
-                  <p>〒350-0465　埼玉県入間郡毛呂山町大字西戸903番地1</p>
+                  <p>株式会社NextEarth</p>
+                  <p>〒350-0204　埼玉県坂戸市大字紺屋866番地1</p>
                   <p>TEL：080-7685-6774</p>
                   <p>Email：info@biz-nextearth.com</p>
                 </div>

@@ -90,7 +90,7 @@ export default function Recruit() {
         <title>求人・採用 - Next Earth</title>
         <meta
           name="description"
-          content="株式会社Next Earthの求人・採用情報。リサイクル・不用品回収、配送、日常清掃のお仕事。日勤〜夜勤まで全6パターン、正社員 or 業務委託の選択制。免許取得支援あり。"
+          content="株式会社NextEarthの求人・採用情報。リサイクル・不用品回収、配送、日常清掃のお仕事。日勤〜夜勤まで全6パターン、正社員 or 業務委託の選択制。免許取得支援あり。"
         />
       </Head>
 

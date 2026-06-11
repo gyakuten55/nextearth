@@ -10,11 +10,12 @@ export default function Company() {
   }, []);
 
   const companyInfo = [
-    { label: '会社名', value: '株式会社Next Earth' },
+    { label: '会社名', value: '株式会社NextEarth' },
+    { label: '法人番号', value: '3010003041673' },
     { label: '代表者', value: '宮脇トニー' },
     { label: '設立日', value: '2023年9月12日' },
     { label: '従業員数', value: '30人' },
-    { label: '所在地', value: '埼玉県入間郡毛呂山町大字西戸903番地1' },
+    { label: '所在地', value: '〒350-0204 埼玉県坂戸市大字紺屋866番地1' },
     { label: '電話番号', value: '080-7685-6774' },
     { label: 'メールアドレス', value: 'info@biz-nextearth.com' },
     {
@@ -27,7 +28,7 @@ export default function Company() {
     <>
       <Head>
         <title>会社情報 - Next Earth</title>
-        <meta name="description" content="株式会社Next Earthの会社概要、企業理念、アクセス情報" />
+        <meta name="description" content="株式会社NextEarthの会社概要、企業理念、アクセス情報" />
       </Head>
 
       <div className="min-h-screen bg-white">
@@ -249,9 +250,9 @@ export default function Company() {
                   </p>
                 </div>
                 <div className="col-span-12 md:col-span-9 text-gray-600 leading-loose">
-                  〒350-0465
+                  〒350-0204
                   <br />
-                  埼玉県入間郡毛呂山町大字西戸903番地1
+                  埼玉県坂戸市大字紺屋866番地1
                 </div>
               </div>
 
@@ -274,7 +275,7 @@ export default function Company() {
               </div>
 
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3229.8!2d139.3!3d35.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDU3JzAwLjAiTiAxMznCsDE4JzAwLjAiRQ!5e0!3m2!1sja!2sjp!4v1234567890"
+                src="https://maps.google.com/maps?q=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%9D%82%E6%88%B8%E5%B8%82%E5%A4%A7%E5%AD%97%E7%B4%BA%E5%B1%8B866%E7%95%AA%E5%9C%B01&output=embed"
                 width="100%"
                 height="420"
                 style={{ border: 0 }}
