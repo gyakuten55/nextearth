@@ -11,6 +11,12 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
 
+        {/* Google Search Console サイト所有権の確認 */}
+        <meta
+          name="google-site-verification"
+          content="NZHq1DWAQ1ZcgmGcKL5cxiiEseMeRwJFUmiU5n9qQ6I"
+        />
+
         {/* microCMS 画像CDNへ事前接続（LCP改善） */}
         <link rel="preconnect" href="https://images.microcms-assets.io" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.microcms-assets.io" />
