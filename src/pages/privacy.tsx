@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import { useEffect, useState } from 'react';
 import PageHero from '@/components/PageHero';
 
@@ -76,13 +76,12 @@ export default function Privacy() {
 
   return (
     <>
-      <Head>
-        <title>プライバシーポリシー - Next Earth</title>
-        <meta
-          name="description"
-          content="株式会社NextEarthのプライバシーポリシー。個人情報の取り扱いについてご説明します。"
-        />
-      </Head>
+      <Seo
+        title="プライバシーポリシー｜株式会社NextEarth"
+        description="株式会社NextEarthのプライバシーポリシー。お客様の個人情報の取り扱い方針について記載しています。"
+        path="/privacy"
+        breadcrumb={[{ name: 'ホーム', path: '/' }, { name: 'プライバシーポリシー' }]}
+      />
 
       <div className="min-h-screen bg-white">
         <PageHero
@@ -179,7 +178,7 @@ export default function Privacy() {
                   </p>
                   <p>株式会社NextEarth</p>
                   <p>〒350-0204　埼玉県坂戸市大字紺屋866番地1</p>
-                  <p>TEL：080-7685-6774</p>
+                  <p>TEL：050-5574-3058</p>
                   <p>Email：info@biz-nextearth.com</p>
                 </div>
               </div>

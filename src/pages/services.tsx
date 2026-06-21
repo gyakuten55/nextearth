@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
+import { serviceNodes } from '@/lib/jsonLd';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -106,13 +107,13 @@ export default function Services() {
 
   return (
     <>
-      <Head>
-        <title>事業内容 - Next Earth</title>
-        <meta
-          name="description"
-          content="株式会社NextEarthの事業内容。リサイクル輸出、不用品回収、買取サービスを提供しています。"
-        />
-      </Head>
+      <Seo
+        title="不用品回収・遺品整理・買取｜坂戸市・川越のNextEarth"
+        description="不用品回収・遺品整理・生前整理・ゴミ屋敷片付け・出張買取・リサイクル海外輸出までNextEarthが一括対応。家庭・車両・企業の片付け、特殊清掃のご相談も。坂戸市・鶴ヶ島・川越・東松山・埼玉県西部へ出張、現地見積もり無料。料金SS8,000円〜LL10万円〜。"
+        path="/services"
+        breadcrumb={[{ name: 'ホーム', path: '/' }, { name: '事業内容' }]}
+        jsonLd={serviceNodes('/services')}
+      />
 
       <div className="min-h-screen bg-white">
         <PageHero

@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -29,15 +29,12 @@ const OUTLINE_NUMBER_STYLE: React.CSSProperties = {
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Next Earth - 地球と共に、未来をつくる。</title>
-        <meta
-          name="description"
-          content="Next Earthは、持続可能な社会の実現に向けて、テクノロジーとアイデアで新しい価値を創造します。"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Seo
+        title="不用品回収・遺品整理なら坂戸市のNextEarth｜埼玉県西部"
+        description="埼玉県坂戸市の不用品回収・遺品整理・生前整理・ゴミ屋敷片付け・リサイクル買取はNextEarthへ。坂戸市・鶴ヶ島・川越・東松山など埼玉県西部に対応。現地見積無料・即日対応・SS8,000円〜。捨てない選択で地球に貢献します。"
+        path="/"
+        ogType="website"
+      />
 
       {/* ── HERO ───────────────────────────── */}
       <section

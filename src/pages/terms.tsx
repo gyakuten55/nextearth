@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import { useEffect, useState } from 'react';
 import PageHero from '@/components/PageHero';
 
@@ -98,13 +98,12 @@ export default function Terms() {
 
   return (
     <>
-      <Head>
-        <title>利用規約 - Next Earth</title>
-        <meta
-          name="description"
-          content="株式会社NextEarthが提供する各種サービスの利用規約です。"
-        />
-      </Head>
+      <Seo
+        title="利用規約｜株式会社NextEarth"
+        description="株式会社NextEarthのサービス利用規約。当サイトおよび各種サービスのご利用条件について記載しています。"
+        path="/terms"
+        breadcrumb={[{ name: 'ホーム', path: '/' }, { name: '利用規約' }]}
+      />
 
       <div className="min-h-screen bg-white">
         <PageHero

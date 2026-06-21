@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import PageHero from '@/components/PageHero';
@@ -86,13 +86,12 @@ export default function Recruit() {
 
   return (
     <>
-      <Head>
-        <title>求人・採用 - Next Earth</title>
-        <meta
-          name="description"
-          content="株式会社NextEarthの求人・採用情報。リサイクル・不用品回収、配送、日常清掃のお仕事。日勤〜夜勤まで全6パターン、正社員 or 業務委託の選択制。免許取得支援あり。"
-        />
-      </Head>
+      <Seo
+        title="採用情報｜ドライバー・仕分け・営業｜NextEarth"
+        description="坂戸市のNextEarthでドライバー・仕分け・事務・営業スタッフを募集。リサイクル・不用品回収、配送、日常清掃のお仕事。日勤〜夜勤まで全6パターン、正社員or業務委託の選択制、免許取得支援あり。捨てない選択から地球を支える仲間を募集しています。"
+        path="/recruit"
+        breadcrumb={[{ name: 'ホーム', path: '/' }, { name: '採用情報' }]}
+      />
 
       <div className="min-h-screen bg-white">
         <PageHero

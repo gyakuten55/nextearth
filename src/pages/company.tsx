@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import { useEffect, useState } from 'react';
 import PageHero from '@/components/PageHero';
 
@@ -26,10 +26,12 @@ export default function Company() {
 
   return (
     <>
-      <Head>
-        <title>会社情報 - Next Earth</title>
-        <meta name="description" content="株式会社NextEarthの会社概要、企業理念、アクセス情報" />
-      </Head>
+      <Seo
+        title="会社情報｜株式会社NextEarth（坂戸市・リサイクル業）"
+        description="株式会社NextEarth（Next Earth）の会社情報。埼玉県坂戸市大字紺屋866番地1。法人番号3010003041673、代表宮脇トニー、2023年設立、従業員20名。不用品回収・遺品整理・リサイクル海外輸出を手がける資源循環の専門企業です。"
+        path="/company"
+        breadcrumb={[{ name: 'ホーム', path: '/' }, { name: '会社情報' }]}
+      />
 
       <div className="min-h-screen bg-white">
         <PageHero
@@ -265,7 +267,7 @@ export default function Company() {
                 <div className="col-span-12 md:col-span-9 text-gray-600 leading-loose">
                   <p>
                     <span className="inline-block w-14 text-gray-500">TEL</span>
-                    080-7685-6774
+                    050-5574-3058
                   </p>
                   <p>
                     <span className="inline-block w-14 text-gray-500">Email</span>

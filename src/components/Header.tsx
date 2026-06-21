@@ -21,6 +21,7 @@ const Header: React.FC = () => {
   const navigationItems = [
     { label: '会社情報', href: '/company' },
     { label: '事業内容', href: '/services' },
+    { label: 'ブログ', href: '/blog' },
     { label: '採用情報', href: '/recruit' },
     { label: 'お問い合わせ', href: '/contact' },
   ];

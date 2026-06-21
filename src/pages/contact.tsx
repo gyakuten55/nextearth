@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import { useEffect, useState, ChangeEvent } from 'react';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
@@ -341,13 +341,12 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>お問い合わせ - Next Earth</title>
-        <meta
-          name="description"
-          content="株式会社NextEarthへのお問い合わせ・求人応募はこちらから。お気軽にご連絡ください。"
-        />
-      </Head>
+      <Seo
+        title="無料見積もり・お問い合わせ｜坂戸市NextEarth"
+        description="不用品回収・遺品整理・買取のご相談やお見積もりはこちら。坂戸市・埼玉県西部は現地見積もり無料、TEL050-5574-3058。求人応募も受け付けております。お気軽にお問い合わせください。"
+        path="/contact"
+        breadcrumb={[{ name: 'ホーム', path: '/' }, { name: 'お問い合わせ' }]}
+      />
 
       <div className="min-h-screen bg-white">
         <PageHero

@@ -1,0 +1,34 @@
+# robots.txt — 方針: AIクローラー全許可（GEO/AIOで生成AIの回答に露出させる）
+# 検索/取得系・ユーザー起動系・学習系すべてクロール許可。送信エンドポイント /api/ のみクロール対象外。
+# 注: robots の Disallow は行儀の良いクローラ向けのクロール抑止であり、アクセス制御ではありません。
+# RFC 9309 によりルールはグループ間で継承されないため、明示ボットにも同じルールを併記しています。
+
+# --- 既定（名前のないすべてのbot） ---
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# --- AI検索/取得・ユーザー起動・学習/グラウンディング系（同一ポリシーを共有グループで明示） ---
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Applebot
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Amazonbot
+User-agent: Meta-ExternalAgent
+User-agent: Bytespider
+User-agent: Google-CloudVertexBot
+Allow: /
+Disallow: /api/
+
+# --- サイトマップ（グループ非依存のグローバルディレクティブ・正規絶対URL） ---
+Sitemap: https://nextearth.site/sitemap.xml
