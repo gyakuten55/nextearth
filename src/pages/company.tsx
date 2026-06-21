@@ -16,7 +16,7 @@ export default function Company() {
     { label: '設立日', value: '2023年9月12日' },
     { label: '従業員数', value: '20名' },
     { label: '所在地', value: '〒350-0204 埼玉県坂戸市大字紺屋866番地1' },
-    { label: '電話番号', value: '080-7685-6774' },
+    { label: '電話番号', value: '050-5574-3058' },
     { label: 'メールアドレス', value: 'info@biz-nextearth.com' },
     {
       label: '事業内容',
